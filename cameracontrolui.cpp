@@ -58,7 +58,6 @@ CameraControlUI::CameraControlUI(QWidget *parent)
         arduino->setFlowControl(QSerialPort::NoFlowControl);
         QObject::connect(arduino,SIGNAL(readyRead()), this, SLOT(readSerialPort()));
     }else{
-        // give error message if not available and stop construction of object
         throw(std::runtime_error("Could not find correct Arduino. Killing program."));
     }
 
