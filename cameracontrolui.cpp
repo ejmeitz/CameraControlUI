@@ -137,10 +137,10 @@ void CameraControlUI::readSerialPort(){
 
     QByteArray data = arduino->readAll();
     serialBuffer += QString::fromStdString(data.toStdString()); //need to do a bit more here, also not sure if return values are even useful?
-    QStringList values = serialBuffer.split(',');
-    qDebug() << data;
+    QStringList values = serialBuffer.split(','); //hard coded arduino has to print "Success,"
+    qDebug() << values;
 
-    if(values[0] == "Success"){
+    if(values.contains("Success")){
         enableAllButtons();
         serialBuffer = "";
         qDebug() << "Full value found, reseting";

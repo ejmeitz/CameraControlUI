@@ -19,7 +19,7 @@
      <rect>
       <x>200</x>
       <y>220</y>
-      <width>314</width>
+      <width>337</width>
       <height>134</height>
      </rect>
     </property>
@@ -50,11 +50,17 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QPushButton" name="moveDown1">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="moveUp1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>100</width>
          <height>40</height>
         </size>
        </property>
@@ -66,7 +72,7 @@
         </font>
        </property>
        <property name="text">
-        <string>-1mm</string>
+        <string>+1mm</string>
        </property>
       </widget>
      </item>
@@ -96,8 +102,8 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="moveUp1">
+     <item row="1" column="2">
+      <widget class="QPushButton" name="moveDownPoint1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -118,7 +124,27 @@
         </font>
        </property>
        <property name="text">
-        <string>+1mm</string>
+        <string>-0.1mm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="moveDown1">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>-1mm</string>
        </property>
       </widget>
      </item>
@@ -148,32 +174,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="moveDownPoint1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>-0.1mm</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
    <widget class="QPushButton" name="cancelButton">
@@ -188,6 +188,25 @@
     <property name="text">
      <string>Cancel</string>
     </property>
+   </widget>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>370</y>
+      <width>193</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <widget class="QLabel" name="setPosionLabel">
+     <property name="text">
+      <string>Set Position:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="variableInputBox"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
