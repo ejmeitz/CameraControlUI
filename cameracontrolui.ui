@@ -98,7 +98,7 @@
         </font>
        </property>
        <property name="text">
-        <string>+0.1mm</string>
+        <string>+0.12mm</string>
        </property>
       </widget>
      </item>
@@ -124,7 +124,7 @@
         </font>
        </property>
        <property name="text">
-        <string>-0.1mm</string>
+        <string>-0.12mm</string>
        </property>
       </widget>
      </item>
@@ -207,6 +207,19 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="variableInputBox"/>
+   </widget>
+   <widget class="QPushButton" name="calibrateButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>420</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Calibrate</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

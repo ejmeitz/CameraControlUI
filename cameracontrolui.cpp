@@ -16,6 +16,8 @@ CameraControlUI::CameraControlUI(QWidget *parent)
     , ui(new Ui::CameraControlUI)
 {
     ui->setupUi(this);
+    ui->variableInputBox->setInputMask("0000000000000"); //9 means digit is required (0-9)  0 means optional digit (0-9)
+    ui->variableInputBox->setClearButtonEnabled(true);
 
     arduino_is_available = false;
     arduino_port_name = "";
@@ -96,7 +98,7 @@ void CameraControlUI::on_moveUp1_clicked()
 {
     disableAllButtons();
     if(arduino->isWritable()){
-            arduino->write("+1");
+            arduino->write("+01");
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -106,7 +108,7 @@ void CameraControlUI::on_moveDown1_clicked()
 {
     disableAllButtons();
     if(arduino->isWritable()){
-            arduino->write("-1");
+            arduino->write("-01");
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -116,7 +118,7 @@ void CameraControlUI::on_moveUpPoint1_clicked()
 {
     disableAllButtons();
     if(arduino->isWritable()){
-            arduino->write("+01");
+            arduino->write("+11");
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -126,14 +128,13 @@ void CameraControlUI::on_moveDownPoint1_clicked()
 {
     disableAllButtons();
     if(arduino->isWritable()){
-            arduino->write("-01");
+            arduino->write("-11");
         }else{
             qDebug() << "Couldn't write to serial!";
         }
 }
 
 void CameraControlUI::readSerialPort(){
-
     QByteArray data = arduino->readAll();
     serialBuffer += QString::fromStdString(data.toStdString()); //need to do a bit more here, also not sure if return values are even useful?
     QStringList values = serialBuffer.split(','); //hard coded arduino has to print "Success,"
@@ -143,7 +144,16 @@ void CameraControlUI::readSerialPort(){
         enableAllButtons();
         serialBuffer = "";
         qDebug() << "Full value found, reseting";
+    }else if(values.contains("Failure")){
+        enableAllButtons();
+        serialBuffer = "";
+        qDebug() << "Fail";
+    }else{
+        qDebug() << "Nothing";
     }
+
+
+
 
 }
 
@@ -154,6 +164,7 @@ void CameraControlUI::disableAllButtons(){
     ui->moveUp10->setDisabled(true);
     ui->moveDownPoint1->setDisabled(true);
     ui->moveUpPoint1->setDisabled(true);
+    ui->variableInputBox->setDisabled(true);
 }
 
 void CameraControlUI::enableAllButtons(){
@@ -163,4 +174,21 @@ void CameraControlUI::enableAllButtons(){
     ui->moveUp10->setDisabled(false);
     ui->moveDownPoint1->setDisabled(false);
     ui->moveUpPoint1->setDisabled(false);
+    ui->variableInputBox->setDisabled(false);
+}
+
+void CameraControlUI::on_variableInputBox_editingFinished()
+{
+    int desiredMovement = ui->variableInputBox->text().toInt();
+    qDebug() << "Editing finished";
+}
+
+void CameraControlUI::on_calibrateButton_clicked()
+{
+    disableAllButtons();
+    if(arduino->isWritable()){
+            arduino->write("C");
+        }else{
+            qDebug() << "Couldn't write to serial!";
+        }
 }

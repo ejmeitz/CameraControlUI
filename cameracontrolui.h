@@ -32,12 +32,16 @@ private slots:
     void readSerialPort();
 
 
+    void on_variableInputBox_editingFinished();
+
+    void on_calibrateButton_clicked();
+
 private:
     Ui::CameraControlUI *ui;
 
     QSerialPort *arduino;
     static const quint16 arduino_uno_vendor_id = 9025;
-    static const quint16 arduino_uno_product_id = 67;
+    static const quint16 arduino_uno_product_id = 32822;
     QString arduino_port_name;
     bool arduino_is_available;
 
