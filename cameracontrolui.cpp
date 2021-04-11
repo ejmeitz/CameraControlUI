@@ -16,7 +16,7 @@ CameraControlUI::CameraControlUI(QWidget *parent)
     , ui(new Ui::CameraControlUI)
 {
     ui->setupUi(this);
-    ui->variableInputBox->setInputMask("0000000000000"); //9 means digit is required (0-9)  0 means optional digit (0-9)
+    ui->variableInputBox->setInputMask("000000000"); //9 means digit is required (0-9)  0 means optional digit (0-9)
     ui->variableInputBox->setClearButtonEnabled(true);
 
     arduino_is_available = false;
@@ -52,13 +52,30 @@ CameraControlUI::CameraControlUI(QWidget *parent)
     if(arduino_is_available){
         // open and configure the serialport
         arduino->setPortName(arduino_port_name);
-        arduino->open(QSerialPort::ReadWrite);
-        arduino->setBaudRate(QSerialPort::Baud9600);
-        arduino->setDataBits(QSerialPort::Data8);
-        arduino->setParity(QSerialPort::NoParity);
-        arduino->setStopBits(QSerialPort::OneStop);
-        arduino->setFlowControl(QSerialPort::NoFlowControl);
-        QObject::connect(arduino,SIGNAL(readyRead()), this, SLOT(readSerialPort()));
+        if(arduino->open(QSerialPort::ReadWrite)){
+            arduino->setBaudRate(QSerialPort::Baud9600);
+            arduino->setDataBits(QSerialPort::Data8);
+            arduino->setParity(QSerialPort::NoParity);
+            arduino->setStopBits(QSerialPort::OneStop);
+            arduino->setFlowControl(QSerialPort::HardwareControl);
+            QObject::connect(arduino,SIGNAL(readyRead()), this, SLOT(readSerialPort()));
+            qDebug() << arduino->error();
+
+            //no clue why but close port and re-open to fix some boot issues with arduino
+            Sleep(10);
+            arduino->close();
+            Sleep(10);
+
+            arduino->open(QSerialPort::ReadWrite);
+            arduino->setBaudRate(QSerialPort::Baud9600);
+            arduino->setDataBits(QSerialPort::Data8);
+            arduino->setParity(QSerialPort::NoParity);
+            arduino->setStopBits(QSerialPort::OneStop);
+            arduino->setFlowControl(QSerialPort::HardwareControl);
+        }else{
+            throw(std::runtime_error("Could not open serial port. Killing program."));
+        }
+
     }else{
         throw(std::runtime_error("Could not find correct Arduino. Killing program."));
     }
@@ -179,15 +196,19 @@ void CameraControlUI::enableAllButtons(){
 
 void CameraControlUI::on_variableInputBox_editingFinished()
 {
-    int desiredMovement = ui->variableInputBox->text().toInt();
-    qDebug() << "Editing finished";
+    QString desiredMovement = ui->variableInputBox->text();
+    if(arduino->isWritable()){
+            arduino->write(desiredMovement.toLocal8Bit());
+        }else{
+            qDebug() << "Couldn't write to serial!";
+        }
 }
 
 void CameraControlUI::on_calibrateButton_clicked()
 {
     disableAllButtons();
     if(arduino->isWritable()){
-            arduino->write("C");
+            arduino->write("Cal");
         }else{
             qDebug() << "Couldn't write to serial!";
         }

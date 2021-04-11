@@ -1,4 +1,4 @@
-const int LimitPin = 7;
+const int LimitPin = 0;
 int flag = 0;
 
 void setup() {

@@ -2,8 +2,8 @@
 #include <HighPowerStepperDriver.h>
 
 const uint8_t CS_Pin = 4;
-const uint8_t BEMF_Pin = A5;
 const uint8_t Limit_Switch_Pin = 0;
+const uint8_t powerPin = 7; //just using to power breadboard rail
 
 volatile int flag = 0;
 float pos = 0;
@@ -23,12 +23,14 @@ HighPowerStepperDriver sd;
 
 void setup() {
   Serial.begin(9600);
-  Serial.setTimeout(250);
+  //Serial.setTimeout(250);
 
   SPI.begin();
   sd.setChipSelectPin(CS_Pin);
-  pinMode(Limit_Switch_Pin,INPUT);
-  attachInterrupt(digitalPinToInterrupt(0), ISR_LimitSwitch, FALLING); 
+  pinMode(Limit_Switch_Pin,INPUT_PULLUP);
+  pinMode(powerPin, OUTPUT);
+  digitalWrite(powerPin, HIGH);
+  attachInterrupt(digitalPinToInterrupt(Limit_Switch_Pin), ISR_LimitSwitch, FALLING); 
 
   // Give the driver some time to power up.
   delay(1);
@@ -133,11 +135,7 @@ int parseAndMove(String data){
   }
   
 }
-//
-//void getBEMF(){
-//  val = analogRead(BEMF_Pin);
-//  serial.println(val);
-//}
+
 
 void checkLimitSwitch(){
    if( (digitalRead(Limit_Switch_Pin) == LOW) && (flag == 0) ) 
