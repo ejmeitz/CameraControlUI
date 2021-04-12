@@ -80,6 +80,9 @@ CameraControlUI::CameraControlUI(QWidget *parent)
         throw(std::runtime_error("Could not find correct Arduino. Killing program."));
     }
 
+    disableAllButtons();
+    ui->calibrateButton->setEnabled(true); //we want to force calibration
+    ui->currentPosValue->setText("UNKNOWN");
 }
 
 CameraControlUI::~CameraControlUI()
@@ -96,6 +99,7 @@ void CameraControlUI::on_moveUp10_clicked(){
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("+10");
+            currentPosition += 10;
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -106,6 +110,7 @@ void CameraControlUI::on_moveDown10_clicked()
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("-10");
+            currentPosition -= 10;
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -116,6 +121,7 @@ void CameraControlUI::on_moveUp1_clicked()
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("+01");
+            currentPosition += 1;
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -126,6 +132,7 @@ void CameraControlUI::on_moveDown1_clicked()
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("-01");
+            currentPosition -= 1;
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -136,6 +143,7 @@ void CameraControlUI::on_moveUpPoint1_clicked()
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("+11");
+            currentPosition += 0.12;
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -146,6 +154,7 @@ void CameraControlUI::on_moveDownPoint1_clicked()
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("-11");
+            currentPosition -= 0.12;
         }else{
             qDebug() << "Couldn't write to serial!";
         }
@@ -160,17 +169,31 @@ void CameraControlUI::readSerialPort(){
     if(values.contains("Success")){
         enableAllButtons();
         serialBuffer = "";
+        ui->currentPosValue->setText(QString::number(currentPosition));
         qDebug() << "Full value found, reseting";
-    }else if(values.contains("Failure")){
+    }else if(values.contains("Invalid")){
+        QMessageBox Msgbox;
+            Msgbox.setText("Position out of bounds. Either re-calibrate or pick a valid position. \n"
+            " Max: 250, Min: 5.");
+            Msgbox.setIcon(QMessageBox::Icon::Critical);
+            Msgbox.exec();
         enableAllButtons();
         serialBuffer = "";
-        qDebug() << "Fail";
+    }else if(values.contains("Unknown")){
+        QMessageBox Msgbox;
+            Msgbox.setText("Arduino failed to parse. Try again");
+            Msgbox.setIcon(QMessageBox::Icon::Critical);
+            Msgbox.exec();
+        enableAllButtons();
+        serialBuffer = "";
     }else{
-        qDebug() << "Nothing";
+        QMessageBox Msgbox;
+            Msgbox.setText("Unknown error do you wish to continue?");
+            Msgbox.setIcon(QMessageBox::Icon::Critical);
+            Msgbox.exec();
+        enableAllButtons();
+        serialBuffer = "";
     }
-
-
-
 
 }
 
@@ -182,6 +205,8 @@ void CameraControlUI::disableAllButtons(){
     ui->moveDownPoint1->setDisabled(true);
     ui->moveUpPoint1->setDisabled(true);
     ui->variableInputBox->setDisabled(true);
+    ui->moveButton->setDisabled(true);
+    ui->calibrateButton->setDisabled(true);
 }
 
 void CameraControlUI::enableAllButtons(){
@@ -192,16 +217,8 @@ void CameraControlUI::enableAllButtons(){
     ui->moveDownPoint1->setDisabled(false);
     ui->moveUpPoint1->setDisabled(false);
     ui->variableInputBox->setDisabled(false);
-}
-
-void CameraControlUI::on_variableInputBox_editingFinished()
-{
-    QString desiredMovement = ui->variableInputBox->text();
-    if(arduino->isWritable()){
-            arduino->write(desiredMovement.toLocal8Bit());
-        }else{
-            qDebug() << "Couldn't write to serial!";
-        }
+    ui->moveButton->setDisabled(false);
+    ui->calibrateButton->setDisabled(false);
 }
 
 void CameraControlUI::on_calibrateButton_clicked()
@@ -209,6 +226,17 @@ void CameraControlUI::on_calibrateButton_clicked()
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("Cal");
+            currentPosition = 5; //Arduino sets it to 5 will change if value changes there.
+        }else{
+            qDebug() << "Couldn't write to serial!";
+        }
+}
+
+void CameraControlUI::on_moveButton_clicked()
+{
+    QString desiredMovement = ui->variableInputBox->text();
+    if(arduino->isWritable()){
+            arduino->write(desiredMovement.toLocal8Bit());
         }else{
             qDebug() << "Couldn't write to serial!";
         }

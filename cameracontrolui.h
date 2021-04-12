@@ -31,10 +31,9 @@ private slots:
 
     void readSerialPort();
 
-
-    void on_variableInputBox_editingFinished();
-
     void on_calibrateButton_clicked();
+
+    void on_moveButton_clicked();
 
 private:
     Ui::CameraControlUI *ui;
@@ -46,6 +45,8 @@ private:
     bool arduino_is_available;
 
     QString serialBuffer;
+
+    float currentPosition = 0;
 
     void disableAllButtons();
     void enableAllButtons();

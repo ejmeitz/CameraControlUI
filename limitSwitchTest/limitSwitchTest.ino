@@ -2,7 +2,7 @@ const int LimitPin = 0;
 int flag = 0;
 
 void setup() {
-  pinMode(LimitPin,INPUT);
+  pinMode(LimitPin,INPUT_PULLUP);
   Serial.begin(9600);
 
 }

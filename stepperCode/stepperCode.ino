@@ -6,7 +6,9 @@ const uint8_t Limit_Switch_Pin = 0;
 const uint8_t powerPin = 7; //just using to power breadboard rail
 
 volatile int flag = 0;
-float pos = 0;
+float currentPos = 0;
+float minPos = 5; //[mm]
+float maxPos = 250; //[mm]
 bool isCalibrating = false; //used to ignore hardward interrupt during calibration routine
 
 const HPSDStepMode microStepSetting = HPSDStepMode::MicroStep2; //1:1 is fastest, but can't use stall detection
@@ -30,7 +32,7 @@ void setup() {
   pinMode(Limit_Switch_Pin,INPUT_PULLUP);
   pinMode(powerPin, OUTPUT);
   digitalWrite(powerPin, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Limit_Switch_Pin), ISR_LimitSwitch, FALLING); 
+  attachInterrupt(digitalPinToInterrupt(Limit_Switch_Pin), ISR_LimitSwitch, FALLING); //could just say calibration is good enough and not have interrupt?
 
   // Give the driver some time to power up.
   delay(1);
@@ -58,11 +60,17 @@ void setup() {
 
 String serialData = ""; 
 void loop() {
-  if (Serial.available() > 0) {    //length of values from Qt will always be 3 bytes???? do i want to make this >2??
-      serialData += Serial.readString();   
-      if (parseAndMove(serialData)== 0){
+  if (Serial.available() > 1) {    //length of values from Qt will always be 3 bytes???? do i want to make this >2??
+      serialData += Serial.readString();
+      int result = parseAndMove(serialData);
+      if (result == 0){
         serialData = "";
         Serial.write("Success,");
+      }else if(result == -2){ //invalid position
+        serialData = "";
+        Serial.write("Invalid,");
+      }else{
+        Serial.write("Unknown,");
       }
     }
  }
@@ -70,61 +78,84 @@ void loop() {
 
 int parseAndMove(String data){
   if (data == "+10"){
-    sd.setDirection(1);
-    for(unsigned int x = 0; x < 250 * microStepFactor; x++)
-    {
-      sd.step();
-      delayMicroseconds(StepPeriodUs);
+    if(checkValidPosition(10)){
+       sd.setDirection(1);
+      for(unsigned int x = 0; x < 250 * microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos += 10;
+      return 0;
+    }else{
+      return -2;
     }
-    pos += 10;
-    return 0;
   }else if(data == "-10"){
-    sd.setDirection(0);
-    for(unsigned int x = 0; x < 250 * microStepFactor; x++)
-    {
-      sd.step();
-      delayMicroseconds(StepPeriodUs);
+    if(checkValidPosition(-10)){
+       sd.setDirection(0);
+      for(unsigned int x = 0; x < 250 * microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos -= 10;
+      return 0;
+    }else{
+      return -2;
     }
-    pos -= 10;
-    return 0;
   }else if(data == "+01"){
-    sd.setDirection(1);
-    for(unsigned int x = 0; x < 25 * microStepFactor; x++)
-    {
-      sd.step();
-      delayMicroseconds(StepPeriodUs);
+    if(checkValidPosition(1)){
+      sd.setDirection(1);
+      for(unsigned int x = 0; x < 25 * microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos += 1;
+      return 0;
+    }else{
+      return -2;
     }
-    pos += 1;
-    return 0;
   }else if(data == "-01"){
-    sd.setDirection(0);
-    for(unsigned int x = 0; x < 25 * microStepFactor; x++)
-    {
-      sd.step();
-      delayMicroseconds(StepPeriodUs);
+    if(checkValidPosition(-1)){
+      sd.setDirection(0);
+      for(unsigned int x = 0; x < 25 * microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos -= 1;
+      return 0;
+    }else{
+      return -2;
     }
-    pos -= 1;
-    return 0;
   }else if(data == "+11"){
-    sd.setDirection(1);
-    for(unsigned int x = 0; x < 3 * microStepFactor; x++)
-    {
-      sd.step();
-      delayMicroseconds(StepPeriodUs);
+     if(checkValidPosition(0.12)){
+      sd.setDirection(1);
+      for(unsigned int x = 0; x < 3 * microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos += 0.12;
+      return 0;
+    }else{
+      return -2;
     }
-    pos += 0.12;
-    return 0;
   }else if(data == "-11"){
-    sd.setDirection(0);
-    for(unsigned int x = 0; x < 3 * microStepFactor; x++)
-    {
-      sd.step();
-      delayMicroseconds(StepPeriodUs);
+    if(checkValidPosition(-0.12)){
+      sd.setDirection(0);
+      for(unsigned int x = 0; x < 3 * microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos -= 0.12;
+      return 0;
+    }else{
+      return -2;
     }
-    pos -= 0.12;
-    return 0;
   }else if(data == "Cal"){
-    Serial.println("Calibrating");
     isCalibrating = true;
     calibrate();
     isCalibrating = false;
@@ -137,28 +168,20 @@ int parseAndMove(String data){
 }
 
 
-void checkLimitSwitch(){
-   if( (digitalRead(Limit_Switch_Pin) == LOW) && (flag == 0) ) 
-  {
-    Serial.println("door is closed"); 
-    flag = 1; 
-    
+bool checkValidPosition(float movement){
+  float nextPos = currentPos + movement;
+  if(nextPos > maxPos || nextPos < minPos){
+    return false;
   }
-  
-    if( (digitalRead(Limit_Switch_Pin) == HIGH) && (flag == 1) ) 
-  {
-    Serial.println("door is opened"); 
-    flag = 0;
- 
-  }
+  return true;
 }
 
 void ISR_LimitSwitch(){
   if(isCalibrating == false){
     static unsigned long last_interrupt_time = 0;
     unsigned long interrupt_time = millis();
-    // If interrupts come faster than 200ms, assume it's a bounce and ignore
-    if (interrupt_time - last_interrupt_time > 200)
+    // If interrupts come faster than 300ms, assume it's a bounce and ignore
+    if (interrupt_time - last_interrupt_time > 300)
     {
       Serial.println("Triggered not during calibration");
     }
@@ -166,11 +189,6 @@ void ISR_LimitSwitch(){
   }
 }
 
-void ISR_Fault(){
-  //TO-DO 
-  //Generic fault thrown by stepper driver
-  //kill program
-}
 
 void calibrate(){
   sd.setDirection(0); //set direction towards limit switch
@@ -215,5 +233,5 @@ void calibrate(){
       delayMicroseconds(StepPeriodUs);
     }
   
-  pos = 5.0; //since we backed off 5 this is now the position
+  currentPos = minPos; //since we backed off 5 this is now the position
 }
