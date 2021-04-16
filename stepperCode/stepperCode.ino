@@ -60,7 +60,7 @@ void setup() {
 
 String serialData = ""; 
 void loop() {
-  if (Serial.available() > 1) {    //length of values from Qt will always be 3 bytes???? do i want to make this >2??
+  if (Serial.available() > 0) {    //length of values from Qt will always be 3 bytes???? do i want to make this >2??
       serialData += Serial.readString();
       int result = parseAndMove(serialData);
       if (result == 0){

@@ -1,5 +1,6 @@
 #include "cameracontrolui.h"
 #include "ui_cameracontrolui.h"
+#include "custommovement.h"
 #include "enums.h"
 
 #include <QtSerialPort/QSerialPort>
@@ -16,8 +17,11 @@ CameraControlUI::CameraControlUI(QWidget *parent)
     , ui(new Ui::CameraControlUI)
 {
     ui->setupUi(this);
-    ui->variableInputBox->setInputMask("000000000"); //9 means digit is required (0-9)  0 means optional digit (0-9)
-    ui->variableInputBox->setClearButtonEnabled(true);
+
+    ui->doubleSpinBox->setDecimals(2);
+    ui->doubleSpinBox->setSingleStep(5);
+    ui->doubleSpinBox->setRange(0,300);
+
 
     arduino_is_available = false;
     arduino_port_name = "";
@@ -204,7 +208,7 @@ void CameraControlUI::disableAllButtons(){
     ui->moveUp10->setDisabled(true);
     ui->moveDownPoint1->setDisabled(true);
     ui->moveUpPoint1->setDisabled(true);
-    ui->variableInputBox->setDisabled(true);
+    ui->doubleSpinBox->setDisabled(true);
     ui->moveButton->setDisabled(true);
     ui->calibrateButton->setDisabled(true);
 }
@@ -216,7 +220,7 @@ void CameraControlUI::enableAllButtons(){
     ui->moveUp10->setDisabled(false);
     ui->moveDownPoint1->setDisabled(false);
     ui->moveUpPoint1->setDisabled(false);
-    ui->variableInputBox->setDisabled(false);
+    ui->doubleSpinBox->setDisabled(false);
     ui->moveButton->setDisabled(false);
     ui->calibrateButton->setDisabled(false);
 }
@@ -234,10 +238,19 @@ void CameraControlUI::on_calibrateButton_clicked()
 
 void CameraControlUI::on_moveButton_clicked()
 {
-    QString desiredMovement = ui->variableInputBox->text();
+    float desiredPosition = ui->doubleSpinBox->value();
+    float movement =  desiredPosition - currentPosition;
+
+    customMovement movementChain(movement);
+     qDebug() << movementChain.smallMoves;
+    qDebug() << movementChain.createMovementString();
+
+
     if(arduino->isWritable()){
-            arduino->write(desiredMovement.toLocal8Bit());
+            arduino->write(movementChain.createMovementString().toLocal8Bit());
         }else{
             qDebug() << "Couldn't write to serial!";
         }
 }
+
+
