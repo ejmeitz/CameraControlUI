@@ -105,6 +105,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E1052569BE074B4FABC04BDB8363CDB3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EC5BDAFEA1B14A788FBB44C1E2B8925E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -118,12 +124,6 @@
         "Entry"
         {
         "MsmKey" = "8:_F8CE845851654959BE2F30162644CBF8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FC349776C54C41209559581EAE4E02DD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -187,7 +187,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5Network.dll"
             "TargetName" = "8:Qt5Network.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -207,7 +207,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\opengl32sw.dll"
             "TargetName" = "8:opengl32sw.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -227,7 +227,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\libGLESv2.dll"
             "TargetName" = "8:libGLESv2.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -247,7 +247,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\platforms\\qwindows.dll"
             "TargetName" = "8:qwindows.dll"
             "Tag" = "8:"
-            "Folder" = "8:_E0730F1DDF774E01B1765BFA142B0E93"
+            "Folder" = "8:_95CCF6FE1D1F430BAE003E1619B0D0C7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -267,7 +267,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5Widgets.dll"
             "TargetName" = "8:Qt5Widgets.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -287,7 +287,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\libwinpthread-1.dll"
             "TargetName" = "8:libwinpthread-1.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -307,7 +307,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\styles\\qwindowsvistastyle.dll"
             "TargetName" = "8:qwindowsvistastyle.dll"
             "Tag" = "8:"
-            "Folder" = "8:_4BFFDC0A383F4E61B496C8E4A74B2CCF"
+            "Folder" = "8:_3C369E0F05184896BFB4F7B487E3B3FB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -327,7 +327,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5Qml.dll"
             "TargetName" = "8:Qt5Qml.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -347,7 +347,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5Quick.dll"
             "TargetName" = "8:Qt5Quick.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -367,7 +367,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\libEGL.dll"
             "TargetName" = "8:libEGL.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -387,7 +387,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5Gui.dll"
             "TargetName" = "8:Qt5Gui.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -407,7 +407,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\CameraControlUI.exe"
             "TargetName" = "8:CameraControlUI.exe"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -427,7 +427,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5SerialPort.dll"
             "TargetName" = "8:Qt5SerialPort.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -447,7 +447,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\libgcc_s_seh-1.dll"
             "TargetName" = "8:libgcc_s_seh-1.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -467,7 +467,27 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5Svg.dll"
             "TargetName" = "8:Qt5Svg.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E1052569BE074B4FABC04BDB8363CDB3"
+            {
+            "SourcePath" = "8:4WayArrow.ico"
+            "TargetName" = "8:4WayArrow.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -487,7 +507,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\libstdc++-6.dll"
             "TargetName" = "8:libstdc++-6.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -507,7 +527,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5Core.dll"
             "TargetName" = "8:Qt5Core.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -527,27 +547,7 @@
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\D3Dcompiler_47.dll"
             "TargetName" = "8:D3Dcompiler_47.dll"
             "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC349776C54C41209559581EAE4E02DD"
-            {
-            "SourcePath" = "8:4WayArrow.ico"
-            "TargetName" = "8:4WayArrow.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_72745CACD0CC41619149C536D7F16935"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -588,44 +588,11 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_72745CACD0CC41619149C536D7F16935"
-                    {
-                    "Name" = "8:CameraControlUI"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_AA63A3FFCE874CEBA30FF60E50C7CDA6"
-                        "Folders"
-                        {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_4BFFDC0A383F4E61B496C8E4A74B2CCF"
-                            {
-                            "Name" = "8:styles"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_0392A6F275A048FA82C1850AE9A32541"
-                                "Folders"
-                                {
-                                }
-                            }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_E0730F1DDF774E01B1765BFA142B0E93"
-                            {
-                            "Name" = "8:platforms"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_94BFEC7F1DDB4BAEA665D356A118DCF5"
-                                "Folders"
-                                {
-                                }
-                            }
-                        }
-                    }
                 }
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_ED6C6BC8AEC842F68CE19086CE09E15B"
             {
-            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -633,6 +600,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_3C369E0F05184896BFB4F7B487E3B3FB"
+                    {
+                    "Name" = "8:styles"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_0392A6F275A048FA82C1850AE9A32541"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_95CCF6FE1D1F430BAE003E1619B0D0C7"
+                    {
+                    "Name" = "8:platforms"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_94BFEC7F1DDB4BAEA665D356A118DCF5"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -650,9 +639,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:controlUI-steupProject"
+        "ProductName" = "8:cameraControlUI"
         "ProductCode" = "8:{12A09642-A9D1-44B1-9DF5-499936E52181}"
-        "PackageCode" = "8:{C8467F31-4993-4F10-8918-5699BE8ADF52}"
+        "PackageCode" = "8:{923766F3-B481-43E3-9A06-E22F9CBB3EEE}"
         "UpgradeCode" = "8:{766389C0-8D56-4256-8924-FADDF3FBEBC3}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -660,12 +649,12 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Ethan Meitz"
+        "Manufacturer" = "8:EthanMeitz"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:controlUI-steupProject"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:16122727898"
+        "ARPCONTACT" = "8:EthanMeitz"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -772,7 +761,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_610D6541878143958B00968B3A4B8B92"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F3B0621810154DACA923F5E433BECE9E"
             {
             "Name" = "8:CameraControlUI.exe"
             "Arguments" = "8:"
@@ -782,8 +771,8 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_944B14C56B354C788A7A475120C53B60"
             "Folder" = "8:_030EEC6519604972B972E1DC8AE2DDA4"
-            "WorkingFolder" = "8:_72745CACD0CC41619149C536D7F16935"
-            "Icon" = "8:_FC349776C54C41209559581EAE4E02DD"
+            "WorkingFolder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
+            "Icon" = "8:_E1052569BE074B4FABC04BDB8363CDB3"
             "Feature" = "8:"
             }
         }
