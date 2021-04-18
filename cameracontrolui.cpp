@@ -242,12 +242,13 @@ void CameraControlUI::on_moveButton_clicked()
     QString valueToWrite = "";
 
     if(movement <= 0){
-        valueToWrite += "+";
-        valueToWrite += QString::number(qAbs(movement));
-    }else{
         valueToWrite += "-";
         valueToWrite += QString::number(qAbs(movement));
+    }else{
+        valueToWrite += "+";
+        valueToWrite += QString::number(qAbs(movement));
     }
+    qDebug() << valueToWrite;
 
     if(arduino->isWritable()){
             arduino->write(valueToWrite.toLocal8Bit());

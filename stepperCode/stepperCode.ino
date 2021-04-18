@@ -32,7 +32,6 @@ void setup() {
   pinMode(Limit_Switch_Pin,INPUT_PULLUP);
   pinMode(powerPin, OUTPUT);
   digitalWrite(powerPin, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Limit_Switch_Pin), ISR_LimitSwitch, FALLING); //could just say calibration is good enough and not have interrupt?
 
   // Give the driver some time to power up.
   delay(1);
@@ -212,19 +211,6 @@ bool checkValidPosition(float movement){
     return false;
   }
   return true;
-}
-
-void ISR_LimitSwitch(){
-  if(isCalibrating == false){
-    static unsigned long last_interrupt_time = 0;
-    unsigned long interrupt_time = millis();
-    // If interrupts come faster than 300ms, assume it's a bounce and ignore
-    if (interrupt_time - last_interrupt_time > 300)
-    {
-      Serial.println("Triggered not during calibration");
-    }
-    last_interrupt_time = interrupt_time;
-  }
 }
 
 
