@@ -1,6 +1,5 @@
 #include "cameracontrolui.h"
 #include "ui_cameracontrolui.h"
-#include "custommovement.h"
 #include "enums.h"
 
 #include <QtSerialPort/QSerialPort>
@@ -239,15 +238,19 @@ void CameraControlUI::on_calibrateButton_clicked()
 void CameraControlUI::on_moveButton_clicked()
 {
     float desiredPosition = ui->doubleSpinBox->value();
-    float movement =  desiredPosition - currentPosition;
+    float movement = desiredPosition - currentPosition;
+    QString valueToWrite = "";
 
-    customMovement movementChain(movement);
-     qDebug() << movementChain.smallMoves;
-    qDebug() << movementChain.createMovementString();
-
+    if(movement <= 0){
+        valueToWrite += "+";
+        valueToWrite += QString::number(qAbs(movement));
+    }else{
+        valueToWrite += "-";
+        valueToWrite += QString::number(qAbs(movement));
+    }
 
     if(arduino->isWritable()){
-            arduino->write(movementChain.createMovementString().toLocal8Bit());
+            arduino->write(valueToWrite.toLocal8Bit());
         }else{
             qDebug() << "Couldn't write to serial!";
         }

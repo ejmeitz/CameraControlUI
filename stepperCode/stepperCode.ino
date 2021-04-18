@@ -60,7 +60,7 @@ void setup() {
 
 String serialData = ""; 
 void loop() {
-  if (Serial.available() > 0) {    //length of values from Qt will always be 3 bytes???? do i want to make this >2??
+  if (Serial.available() > 1) {    //length of values from Qt will always be >=3 bytes???? do i want to make this >2??
       serialData += Serial.readString();
       int result = parseAndMove(serialData);
       if (result == 0){
@@ -70,6 +70,7 @@ void loop() {
         serialData = "";
         Serial.write("Invalid,");
       }else{
+        serialData = "";
         Serial.write("Unknown,");
       }
     }
@@ -161,8 +162,45 @@ int parseAndMove(String data){
     isCalibrating = false;
     return 0;
   }
-  else{
-    return -1;
+  else{ //assume its a custom movement
+    char firstChar = data.charAt(0);
+    if(firstChar == '+'){
+      data.remove(0);
+      float movement = data.toFloat();
+      int steps = int(movement/0.04); 
+      if(checkValidPosition(movement)){
+        sd.setDirection(1);
+        for(unsigned int x = 0; x < steps * microStepFactor; x++)
+        {
+          sd.step();
+          delayMicroseconds(StepPeriodUs); 
+        }
+        currentPos += (steps * 0.04);
+        return 0;
+      }else{
+        return -2;
+      }
+      
+    }else if(firstChar == '-'){
+      data.remove(0);
+      float movement = data.toFloat();
+      int steps = int(movement/0.04); 
+      if(checkValidPosition(-1*movement)){
+        sd.setDirection(0);
+        for(unsigned int x = 0; x < steps * microStepFactor; x++)
+        {
+          sd.step();
+          delayMicroseconds(StepPeriodUs);
+        }
+        currentPos -= (steps * 0.04);
+        return 0;
+      }else{
+        return -2;
+      }
+      
+    }else{ //if it isnt a custom movement return a new failure value
+      return -3;
+    }
   }
   
 }
