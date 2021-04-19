@@ -35,6 +35,10 @@ private slots:
 
     void on_moveButton_clicked();
 
+    void on_singleStepUpButton_clicked();
+
+    void on_singleStepDownButton_clicked();
+
 private:
     Ui::CameraControlUI *ui;
 

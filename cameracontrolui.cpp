@@ -163,6 +163,29 @@ void CameraControlUI::on_moveDownPoint1_clicked()
         }
 }
 
+
+void CameraControlUI::on_singleStepUpButton_clicked()
+{
+    disableAllButtons();
+    if(arduino->isWritable()){
+            arduino->write("+04");
+            currentPosition += 0.04;
+        }else{
+            qDebug() << "Couldn't write to serial!";
+        }
+}
+
+void CameraControlUI::on_singleStepDownButton_clicked()
+{
+    disableAllButtons();
+    if(arduino->isWritable()){
+            arduino->write("-04");
+            currentPosition -= 0.04;
+        }else{
+            qDebug() << "Couldn't write to serial!";
+        }
+}
+
 void CameraControlUI::readSerialPort(){
     QByteArray data = arduino->readAll();
     serialBuffer += QString::fromStdString(data.toStdString()); //need to do a bit more here, also not sure if return values are even useful?
@@ -256,5 +279,6 @@ void CameraControlUI::on_moveButton_clicked()
             qDebug() << "Couldn't write to serial!";
         }
 }
+
 
 

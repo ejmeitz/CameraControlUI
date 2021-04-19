@@ -155,6 +155,32 @@ int parseAndMove(String data){
     }else{
       return -2;
     }
+  }else if(data == "+04"){
+    if(checkValidPosition(0.04)){
+      sd.setDirection(1);
+      for(unsigned int x = 0; x < microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos += 0.04;
+      return 0;
+    }else{
+      return -2;
+    }
+  }else if(data == "-04"){
+    if(checkValidPosition(-0.04)){
+      sd.setDirection(0);
+      for(unsigned int x = 0; x < microStepFactor; x++)
+      {
+        sd.step();
+        delayMicroseconds(StepPeriodUs);
+      }
+      currentPos -= 0.04;
+      return 0;
+    }else{
+      return -2;
+    }
   }else if(data == "Cal"){
     isCalibrating = true;
     calibrate();
