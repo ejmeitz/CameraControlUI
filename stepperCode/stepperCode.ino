@@ -7,8 +7,9 @@ const uint8_t powerPin = 7; //just using to power breadboard rail
 
 volatile int flag = 0;
 float currentPos = 0;
+float previousPos = 0;
 float minPos = 5; //[mm]
-float maxPos = 250; //[mm]
+float maxPos = 200; //[mm]
 bool isCalibrating = false; //used to ignore hardward interrupt during calibration routine
 
 const HPSDStepMode microStepSetting = HPSDStepMode::MicroStep2; //1:1 is fastest, but can't use stall detection
@@ -64,9 +65,11 @@ void loop() {
       int result = parseAndMove(serialData);
       if (result == 0){
         serialData = "";
+        previousPos = currentPos;
         Serial.write("Success,");
       }else if(result == -2){ //invalid position
         serialData = "";
+        currentPos = previousPos;
         Serial.write("Invalid,");
       }else{
         serialData = "";
@@ -186,11 +189,11 @@ int parseAndMove(String data){
     calibrate();
     isCalibrating = false;
     return 0;
-  }
-  else{ //assume its a custom movement
+  }else{ //assume its a custom movement
     char firstChar = data.charAt(0);
-    if(firstChar == '+'){
-      data.remove(0);
+    if(firstChar == '+' && data.endsWith("+")){
+      data.remove(0,1);
+      data.remove(data.length() - 1,1);
       float movement = data.toFloat();
       int steps = int(movement/0.04); 
       if(checkValidPosition(movement)){
@@ -206,8 +209,9 @@ int parseAndMove(String data){
         return -2;
       }
       
-    }else if(firstChar == '-'){
-      data.remove(0);
+    }else if(firstChar == '-' && data.endsWith("-")){
+      data.remove(0,1);
+      data.remove(data.length() - 1,1);
       float movement = data.toFloat();
       int steps = int(movement/0.04); 
       if(checkValidPosition(-1*movement)){

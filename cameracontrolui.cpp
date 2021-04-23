@@ -19,7 +19,7 @@ CameraControlUI::CameraControlUI(QWidget *parent)
 
     ui->doubleSpinBox->setDecimals(2);
     ui->doubleSpinBox->setSingleStep(5);
-    ui->doubleSpinBox->setRange(0,300);
+    ui->doubleSpinBox->setRange(0,200);
 
 
     arduino_is_available = false;
@@ -195,12 +195,15 @@ void CameraControlUI::readSerialPort(){
     if(values.contains("Success")){
         enableAllButtons();
         serialBuffer = "";
+        previousPosition = currentPosition; //Save last position
         ui->currentPosValue->setText(QString::number(currentPosition));
         qDebug() << "Full value found, reseting";
     }else if(values.contains("Invalid")){
         QMessageBox Msgbox;
             Msgbox.setText("Position out of bounds. Either re-calibrate or pick a valid position. \n"
-            " Max: 250, Min: 5.");
+            " Max: 200, Min: 5.");
+            currentPosition = previousPosition;
+            ui->currentPosValue->setText(QString::number(currentPosition));
             Msgbox.setIcon(QMessageBox::Icon::Critical);
             Msgbox.exec();
         enableAllButtons();
@@ -233,6 +236,8 @@ void CameraControlUI::disableAllButtons(){
     ui->doubleSpinBox->setDisabled(true);
     ui->moveButton->setDisabled(true);
     ui->calibrateButton->setDisabled(true);
+    ui->singleStepDownButton->setDisabled(true);
+    ui->singleStepUpButton->setDisabled(true);
 }
 
 void CameraControlUI::enableAllButtons(){
@@ -245,6 +250,8 @@ void CameraControlUI::enableAllButtons(){
     ui->doubleSpinBox->setDisabled(false);
     ui->moveButton->setDisabled(false);
     ui->calibrateButton->setDisabled(false);
+    ui->singleStepDownButton->setDisabled(false);
+    ui->singleStepUpButton->setDisabled(false);
 }
 
 void CameraControlUI::on_calibrateButton_clicked()
@@ -260,6 +267,7 @@ void CameraControlUI::on_calibrateButton_clicked()
 
 void CameraControlUI::on_moveButton_clicked()
 {
+    disableAllButtons();
     float desiredPosition = ui->doubleSpinBox->value();
     float movement = desiredPosition - currentPosition;
     QString valueToWrite = "";
@@ -267,14 +275,17 @@ void CameraControlUI::on_moveButton_clicked()
     if(movement <= 0){
         valueToWrite += "-";
         valueToWrite += QString::number(qAbs(movement));
+        valueToWrite += "-";
     }else{
         valueToWrite += "+";
         valueToWrite += QString::number(qAbs(movement));
+        valueToWrite += "+";
     }
     qDebug() << valueToWrite;
 
     if(arduino->isWritable()){
             arduino->write(valueToWrite.toLocal8Bit());
+            currentPosition = desiredPosition;
         }else{
             qDebug() << "Couldn't write to serial!";
         }

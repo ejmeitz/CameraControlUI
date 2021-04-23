@@ -81,12 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_944B14C56B354C788A7A475120C53B60"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_AE74178FF3A74DC8908177D0B1833CE0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,6 +88,12 @@
         "Entry"
         {
         "MsmKey" = "8:_AEA36CB652C0476D9C1FAAF97D23449E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BBBC1822EA1C451C8EF339BB8826DFB5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -145,6 +145,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -161,6 +177,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -402,26 +434,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_944B14C56B354C788A7A475120C53B60"
-            {
-            "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\CameraControlUI.exe"
-            "TargetName" = "8:CameraControlUI.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AE74178FF3A74DC8908177D0B1833CE0"
             {
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\Qt5SerialPort.dll"
@@ -446,6 +458,26 @@
             {
             "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\libgcc_s_seh-1.dll"
             "TargetName" = "8:libgcc_s_seh-1.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BBBC1822EA1C451C8EF339BB8826DFB5"
+            {
+            "SourcePath" = "8:..\\..\\build-CameraControlUI-Desktop_Qt_5_15_2_MinGW_64_bit-Profile\\release\\CameraControlUI.exe"
+            "TargetName" = "8:CameraControlUI.exe"
             "Tag" = "8:"
             "Folder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Condition" = "8:"
@@ -649,12 +681,12 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:EthanMeitz"
+        "Manufacturer" = "8:Ethan Meitz"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:controlUI-steupProject"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:EthanMeitz"
+        "ARPCONTACT" = "8:Ethan Meitz"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -761,7 +793,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F3B0621810154DACA923F5E433BECE9E"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_36AC36D5C35449F88245419B7E66475C"
             {
             "Name" = "8:CameraControlUI.exe"
             "Arguments" = "8:"
@@ -769,7 +801,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_944B14C56B354C788A7A475120C53B60"
+            "Target" = "8:_BBBC1822EA1C451C8EF339BB8826DFB5"
             "Folder" = "8:_030EEC6519604972B972E1DC8AE2DDA4"
             "WorkingFolder" = "8:_ED6C6BC8AEC842F68CE19086CE09E15B"
             "Icon" = "8:_E1052569BE074B4FABC04BDB8363CDB3"
