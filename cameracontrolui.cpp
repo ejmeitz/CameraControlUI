@@ -256,6 +256,13 @@ void CameraControlUI::enableAllButtons(){
 
 void CameraControlUI::on_calibrateButton_clicked()
 {
+
+    QMessageBox msgBox;
+        msgBox.setText("Make sure nothing is below the camera and then click OK");
+        msgBox.setWindowTitle("WARNING");
+        msgBox.setWindowModality(Qt::WindowModal);
+        msgBox.exec();
+
     disableAllButtons();
     if(arduino->isWritable()){
             arduino->write("Cal");
